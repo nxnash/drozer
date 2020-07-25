@@ -1,0 +1,34 @@
+
+This is how I successfully installed drozer on Kali 2020.2 (Linux 5.6.0-kali2-amd64 x86_64) from a wheel.
+
+Please run the following in this exact order:
+
+wget https://github.com/FSecureLABS/drozer/releases/download/2.4.4/drozer-2.4.4-py2-none-any.whl
+apt-get --assume-yes install python-pip
+pip2 install wheel
+pip2 install pyyaml
+pip2 install pyhamcrest
+pip2 install protobuf 
+pip2 install pyopenssl 
+pip2 install twisted
+pip2 install service_identity
+pip2 install drozer-2.4.4-py2-none-any.whl
+The key is to use pip2 with Python 2.7.0.
+
+Next, download drozer agent from https://labs.f-secure.com/tools/drozer/.
+
+Install the agent on your mobile device and turn the agent on.
+
+Then, connect your mobile device to your Kali machine and run:
+
+apt-get --assume-yes install adb
+adb start-server
+adb forward tcp:31415 tcp:31415
+drozer console connect
+You should see no errors now.
+
+Please share the solution with others if it helps.
+
+If for some strange reason you need java or javac run the following:
+
+apt-get install --assume-yes openjdk-8-jdk-headless
